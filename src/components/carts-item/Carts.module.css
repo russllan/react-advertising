@@ -1,0 +1,32 @@
+.carts{
+    width: calc(25% - 25px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #f4f4f4;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.17);
+    border-radius: 6px;
+    overflow: hidden;
+}
+.imgWrapper{
+    height: 200px;
+    width: 100%;
+}
+.imgWrapper > img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+footer{
+    width: 100%;
+    /* padding: 20px 15px; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px ;
+}
+footer > div {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px; 
+    color: #000000;
+}
