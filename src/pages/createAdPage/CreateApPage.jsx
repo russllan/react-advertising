@@ -2,6 +2,13 @@ import { useState } from 'react';
 import Input from '../../components/input/Input'
 import Title from '../../components/title/Title'
 import { base_url } from '../../constants';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
+const toastSetting = {
+    position: "bottom-right",
+    theme: "colored"
+}
 
 function CreateApPage() {
 
@@ -9,9 +16,14 @@ function CreateApPage() {
     const [price, setPrice] = useState("")
     const [description, setDescription] = useState("");
     const [imgUrl, setImgUrl] = useState("")
+    const [isSending, setSending] = useState(false);
+
+    const navigate = useNavigate()
 
     const submit = (e) => {
         e.preventDefault();
+        setSending(true);
+        toast.info("Start", toastSetting)
         fetch(base_url + 'houses', {
             method: "POST",
             headers: {
@@ -23,6 +35,14 @@ function CreateApPage() {
                 price: price,
                 description: description
             })
+        }).then((res) => {
+            if(res.status === 201){
+                toast.success("Success",toastSetting)
+                navigate('/dashboard')
+            }else{
+                toast.error("Error", toastSetting)
+                setSending(false);
+            }
         })
     }
 
@@ -36,11 +56,11 @@ function CreateApPage() {
     <div className='page'>
         <Title position="Center">Создать объявления</Title>
         <form onSubmit={submit}>
-            <Input title="Название" placeholder="Введите название" type="text" value={name} onChange={handleInputChange}/>
-            <Input title="Цена" placeholder="Введите цену" type="Number"  value={price} onChange={handlePriceChange}/>
-            <Input title="Описание" placeholder="Введите описание" type="text"  value={description} onChange={handleTextChange}/>
-            <Input title="Фото" placeholder="picture" type="text"  value={imgUrl} onChange={handleFotoChange}/>
-            <button className='btn-primary'>+ Создать</button>
+            <Input title="Название" placeholder="Введите название" type="text" value={name} onChange={handleInputChange} required/>
+            <Input title="Цена" placeholder="Введите цену" type="Number"  value={price} onChange={handlePriceChange} required/>
+            <Input title="Описание" placeholder="Введите описание" type="text"  value={description} onChange={handleTextChange} required/>
+            <Input title="Фото" placeholder="picture" type="text"  value={imgUrl} onChange={handleFotoChange} required/>
+            <button disabled={isSending} className='btn-primary'>+ Создать</button>
         </form>
     </div>
   )

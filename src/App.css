@@ -29,3 +29,9 @@
   background: rgb(140, 140, 247);
   box-shadow: 0 0 4px rgb(53, 53, 238);
 }
+
+.btn-primary:disabled{
+  cursor: not-allowed;
+  background: rgb(199,199,199);
+  color: rgb(114,114,114);
+}

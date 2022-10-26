@@ -30,3 +30,11 @@ footer > div {
     line-height: 27px; 
     color: #000000;
 }
+.title{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.btn{
+    width: 100%;
+}

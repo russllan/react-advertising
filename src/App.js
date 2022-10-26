@@ -6,9 +6,13 @@ import ProductPage from './pages/productPage/ProductPage';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
 import LoginPage from './pages/loginPage/LoginPage'
 import {useEffect, useState } from 'react'
-import {base_url} from './constants'
 import ErrorBlock from './components/errorBlock/ErrorBlock';
 import CreateApPage from './pages/createAdPage/CreateApPage';
+import {store} from "./redux/index"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Api from './api/Api';
+
 
 function App() {
 
@@ -16,16 +20,24 @@ function App() {
   const [isLoading, setLoading] = useState(true)
 
   useEffect(()=>{
-    fetch(base_url + "houses")
+    Api.getHouses()
       .finally(()=>{
-        setLoading(false);
+          setLoading(false);
+      }) 
+      .then((res) =>{
+        console.log(res);
+        setHousesArray(res.data);
       })
-      .then((resp) => resp.json() )
-      .then(data => {
-        console.log(data)
-        setHousesArray(data);
-      })
-      .catch(()=>{});
+    // fetch(base_url + "houses")
+    //   .finally(()=>{
+    //     setLoading(false);
+    //   })
+    //   .then((resp) => resp.json() )
+    //   .then(data => {
+    //     console.log(data)
+    //     setHousesArray(data);
+    //   })
+    //   .catch(()=>{});
   }, []);
 
   return (
@@ -39,6 +51,7 @@ function App() {
         <Route path='*' element={<ErrorBlock text="Page not found"/>} />
         <Route path='/create-ad' element={<CreateApPage/>}/>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

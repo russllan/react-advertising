@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
 import css from './Carts.module.css';
-import {base_url} from '../../constants';
+import Api from '../../api/Api';
 
 const Carts = (props) =>{
 
     const onDelete = () => {
         const res = window.confirm("Подтвердите действие")
         if(res){
-            fetch(base_url + "houses/" + props.id, {method: "DELETE"})
+            Api.deleteHouse(props.id)
+            // fetch(base_url + "houses/" + props.id, {
+            // method: "DELETE"})
             .finally(()=>{
                 window.location.reload()
             })
@@ -21,12 +23,12 @@ const Carts = (props) =>{
                  alt={props.text} />    
             </div>
             <div className={css.footer}>
-                <div>{props.text}</div>
+                <div className={css.title}>{props.text}</div>
                 <div>{props.price}$</div>
                 {
                     props.admin ? <button onClick={onDelete} className="btn-primary">Удалить</button>
                     : <Link to={'/product/' + props.id}>
-                    <button>Подробнее</button>
+                    <button className={`btn-primary ${css.btn}`}>Подробнее</button>
                 </Link>
                 }
                  
