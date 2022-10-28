@@ -1,13 +1,14 @@
-import {axios, HttpStatusCode} from 'axios'; 
+import axios from 'axios'; 
 import { base_url } from '../constants';
 
 const http = axios.create({
     baseURL: base_url,
 })
 
-const Api = {
+export const Api = {
     getHouses: () => http.get('houses'),
-    deleteHouse: (id) => http.delete('houses/' + id)
+    deleteHouse: (id) => http.delete('houses/' + id),
+    postHouse : (data) => http.post('houses', data)
 }
 
 export default Api;

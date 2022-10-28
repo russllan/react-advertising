@@ -4,6 +4,7 @@ import Title from '../../components/title/Title'
 import { base_url } from '../../constants';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import Api from '../../api/Api';
 
 const toastSetting = {
     position: "bottom-right",
@@ -24,18 +25,28 @@ function CreateApPage() {
         e.preventDefault();
         setSending(true);
         toast.info("Start", toastSetting)
-        fetch(base_url + 'houses', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                title: name,
-                imgUrl: imgUrl,
-                price: price,
-                description: description
-            })
-        }).then((res) => {
+        // fetch(base_url + 'houses', {
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         title: name,
+        //         imgUrl: imgUrl,
+        //         price: price,
+        //         description: description
+        //     })
+        // }) Фетч запрос. Переделка на axios
+
+        const data = {
+            title: name,
+            imgUrl: imgUrl,
+            price: price,
+            description: description
+        }
+
+        Api.postHouse(data)
+        .then((res) => {
             if(res.status === 201){
                 toast.success("Success",toastSetting)
                 navigate('/dashboard')

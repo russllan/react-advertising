@@ -8,10 +8,9 @@ import LoginPage from './pages/loginPage/LoginPage'
 import {useEffect, useState } from 'react'
 import ErrorBlock from './components/errorBlock/ErrorBlock';
 import CreateApPage from './pages/createAdPage/CreateApPage';
-import {store} from "./redux/index"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Api from './api/Api';
+import {Api} from './api/Api';
 
 
 function App() {
