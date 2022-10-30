@@ -3,11 +3,12 @@ import Carts from '../../components/carts-item/Carts'
 import Title from '../../components/title/Title';
 import Loader from '../../components/Loader/Loader'
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-function DashboardPage({isLoadnig, housesArray}) {
+function DashboardPage( ) {
 
-
-  if(isLoadnig){
+  const { isLoading, housesArray } = useSelector((state) => state.houses)
+  if(isLoading){
     return <Loader />
   }
   return (
@@ -17,8 +18,8 @@ function DashboardPage({isLoadnig, housesArray}) {
         <div className={css.cardsWrapper}>
           {/* <Carts text="Продаю дом 6км дом" price="2500"/>
           <Carts text="Продавю 2-ух кмн дом" price="1500"/>
-          <Carts text="Продаю 3-ёх км кв" price="350"/>
-          <Carts text="Продаю 4-её км кв" price="7832"/>
+          <Carts text="Продаю 3-ёх км кв" price="350"/> Здесь статические данные, 
+          <Carts text="Продаю 4-её км кв" price="7832"/> нужно чтобы эти данные приходили из бэкэнда
           <Carts text="Продаю 5-и км кв" price="9102"/> */}
           {
           housesArray.length

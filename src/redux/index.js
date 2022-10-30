@@ -1,5 +1,6 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { combineReducers } from "@reduxjs/toolkit";
 import { authSliceReducer } from './authSlice';
+import { housesSliceReducer } from "./housesSlice";
 
 // const housesSlice = createSlice({
 //     initialState: {
@@ -9,7 +10,7 @@ import { authSliceReducer } from './authSlice';
 
 const reducers = combineReducers({
     auth: authSliceReducer,
-    houses: authSliceReducer
+    houses: housesSliceReducer
 })
 
 export const store =  ({

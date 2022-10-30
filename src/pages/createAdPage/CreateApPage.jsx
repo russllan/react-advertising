@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Input from '../../components/input/Input'
 import Title from '../../components/title/Title'
-import { base_url } from '../../constants';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Api from '../../api/Api';

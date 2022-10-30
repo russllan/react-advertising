@@ -1,6 +1,5 @@
 import React from 'react'
 import {useState} from 'react'
-import { Navigate } from 'react-router-dom';
 import css from './LoginPage.module.css'
 import Title from '../../components/title/Title'
 import { useDispatch } from 'react-redux';
