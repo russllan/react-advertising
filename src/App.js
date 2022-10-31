@@ -15,6 +15,7 @@ import PublicRout from './routes/PublicRout';
 import PrivateRout from './routes/PrivateRout';
 import { useDispatch } from 'react-redux';
 import { housesSliceAction } from './redux/housesSlice';
+import { carsSliceAction } from './redux/carsSlice';
 
 
 function App() {
@@ -42,6 +43,11 @@ function App() {
     //     setHousesArray(data);
     //   })
     //   .catch(()=>{});
+    Api.getCars()
+      .then((res) => {
+          dispatch(carsSliceAction.setData(res.data))
+      })
+
   }, []);
 
   return (

@@ -1,12 +1,16 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 
 function PublicRout( {children} ) {
   const isAuth = useSelector((state) => state.auth.isAuth );
   const navigate = useNavigate();
-
-  if(isAuth){
-    navigate('./DashboardPage');
+  useEffect(() => {
+    if(isAuth){
+      navigate('./DashboardPage');
+    }
+  }, [isAuth])
+  if(isAuth) {
     return "";
   }
   return children;

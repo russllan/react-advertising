@@ -11,7 +11,7 @@ const toastSetting = {
 }
 
 function CreateApPage() {
-
+    const [type, setType] = useState("houses");
     const [name, setName] = useState("")
     const [price, setPrice] = useState("")
     const [description, setDescription] = useState("");
@@ -44,8 +44,7 @@ function CreateApPage() {
             description: description
         }
 
-        Api.postHouse(data)
-        .then((res) => {
+        const response = (res) => {
             if(res.status === 201){
                 toast.success("Success",toastSetting)
                 navigate('/dashboard')
@@ -53,13 +52,20 @@ function CreateApPage() {
                 toast.error("Error", toastSetting)
                 setSending(false);
             }
-        })
+        }
+
+        if(type === 'houses'){
+            Api.postHouse(data).then(response);
+        } else {
+            Api.postCars(data).then(response);
+        }
     }
 
     const handleInputChange = (e) => setName(e.target.value);
     const handlePriceChange = (e) => setPrice(e.target.value);
     const handleTextChange = (e) => setDescription(e.target.value);
     const handleFotoChange = (e) => setImgUrl(e.target.value);
+    const handleType = (e) => setType(e.target.value);
 
 
   return (
@@ -70,6 +76,14 @@ function CreateApPage() {
             <Input title="Цена" placeholder="Введите цену" type="Number"  value={price} onChange={handlePriceChange} required/>
             <Input title="Описание" placeholder="Введите описание" type="text"  value={description} onChange={handleTextChange} required/>
             <Input title="Фото" placeholder="picture" type="text"  value={imgUrl} onChange={handleFotoChange} required/>
+            <div>
+                <label>
+                    <input onChange={handleType} checked={type === 'houses'} type="radio" name='type' value='houses' /> Houses
+                </label>
+                <label>
+                    <input onChange={handleType} checked={type === 'cars'} type="radio" name='type' value='cars' /> Cars
+                </label>
+            </div>
             <button disabled={isSending} className='btn-primary'>+ Создать</button>
         </form>
     </div>

@@ -5,14 +5,18 @@ import Api from '../../api/Api';
 const Carts = (props) =>{
 
     const onDelete = () => {
-        const res = window.confirm("Подтвердите действие")
+        const res = window.confirm("Подтвердите действие");
         if(res){
-            Api.deleteHouse(props.id)
-            // fetch(base_url + "houses/" + props.id, {
-            // method: "DELETE"})
-            .finally(()=>{
-                window.location.reload()
-            })
+            if(props.isCars){
+                Api.deleteCars(props.id).finally(() => {window.location.reload()})
+            } else {
+                Api.deleteHouse(props.id)
+                // fetch(base_url + "houses/" + props.id, {
+                // method: "DELETE"})
+                .finally(()=>{
+                    window.location.reload()
+                })
+            }
         }
     }
 
