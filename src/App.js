@@ -10,12 +10,11 @@ import ErrorBlock from './components/errorBlock/ErrorBlock';
 import CreateApPage from './pages/createAdPage/CreateApPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Api} from './api/Api';
 import PublicRout from './routes/PublicRout';
 import PrivateRout from './routes/PrivateRout';
 import { useDispatch } from 'react-redux';
-import { housesSliceAction } from './redux/housesSlice';
-import { carsSliceAction } from './redux/carsSlice';
+import { fetchHouses} from './redux/housesSlice';
+import { fetchCars } from './redux/carsSlice';
 
 
 function App() {
@@ -26,13 +25,14 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    Api.getHouses()
-      .then((res) =>{
-        console.log(res);
-        // setHousesArray(res.data);
-        // Почт. доставляет в редакс :
-        dispatch( housesSliceAction.setData(res.data) );
-      })
+    // Api.getHouses()
+    //   .then((res) =>{
+    //     console.log(res);
+    //     // setHousesArray(res.data);
+    //     // Почт. доставляет в редакс :
+    //     dispatch( housesSliceAction.setData(res.data) );
+    //   })
+    dispatch(fetchHouses())
     // fetch(base_url + "houses")
     //   .finally(()=>{
     //     setLoading(false);
@@ -43,11 +43,11 @@ function App() {
     //     setHousesArray(data);
     //   })
     //   .catch(()=>{});
-    Api.getCars()
-      .then((res) => {
-          dispatch(carsSliceAction.setData(res.data))
-      })
-
+    // Api.getCars()
+    //   .then((res) => {
+    //       dispatch(carsSliceAction.setData(res.data))
+    //   })
+    dispatch(fetchCars())
   }, []);
 
   return (
